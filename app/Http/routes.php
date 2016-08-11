@@ -11,10 +11,12 @@
 |
 */
 
-\Auth::loginUsingId(1);
-
 Route::get('/', function () {
-    return view('welcome');
+    if (\Auth::check()) {
+        return redirect('/project');
+    }
+
+    return redirect('/login');
 });
 
 Route::group(['middleware' => 'auth'], function(){
